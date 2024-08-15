@@ -15,6 +15,7 @@
 
 # production
 /build
+/utils/care-finder.json
 
 # misc
 .DS_Store
