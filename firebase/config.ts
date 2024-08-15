@@ -3,13 +3,13 @@ import { initializeApp, getApps } from "firebase/app";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCiBw5virmebuiXksL4jvEJYzWLA3AV8AU",
-  authDomain: "care-finder-2c42f.firebaseapp.com",
-  projectId: "care-finder-2c42f",
-  storageBucket: "care-finder-2c42f.appspot.com",
-  messagingSenderId: "177723541297",
-  appId: "1:177723541297:web:269d96e2fe527838f31210",
-  measurementId: "G-3YQRBEVFHQ",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
