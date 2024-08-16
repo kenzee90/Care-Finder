@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 import { getHospitals } from "@/utils/service";
 import { TextInput } from "flowbite-react";
 import { IoSearch } from "react-icons/io5";
-
+import { RiHospitalLine } from "react-icons/ri";
+import { Pagination } from "flowbite-react";
 
 interface Hospital {
   id:string;
@@ -14,15 +15,17 @@ interface Hospital {
 function ListHospitals() {
   const [hospitals, setHospitals] = useState<any>([]);
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize] = useState(10);
+  const [totalPages, setTotalPages] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [state, setState] = useState("");
   const [stateOptions, setStateOptions] = useState<any>([]);
 
   useEffect(() => {
    const fetchHospitals = async () => {
-    const {hospitals}= await getHospitals({ page, pageSize, searchTerm, state });
+    const {hospitals, nextPage}= await getHospitals({ page, pageSize, searchTerm, state });
     setHospitals(hospitals);
+    setTotalPages(nextPage ? nextPage : 1);
    }
 
    fetchHospitals();
@@ -34,6 +37,7 @@ function ListHospitals() {
       const states = Array.from(uniqueStates);
       
       setStateOptions(states);
+      
     }
     fetchStateOptions();
   }, []);
@@ -46,6 +50,7 @@ function ListHospitals() {
     setState(event.target.value);
     setPage(1);
   };
+  const onPageChange = (page: number) => setPage(page);
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -70,12 +75,21 @@ function ListHospitals() {
       </div>
       <ul className="grid w-full grid-cols-2 border p-4 md:grid-cols-3 lg:grid-cols-4 gap-3 shadow-md mb-4">
         {hospitals.map((hospital: Hospital) => (
-          <li key={hospital.id} className="border-2 p-3 rounded-lg">
-            <p>{hospital.name}</p>
+          <li key={hospital.id} className="border-2 p-3 rounded-lg flex flex-col gap-3 justify-between">
+            <div className="flex items-center justify-between">
+                <h3 className="text-3xl font-bold tracking-tight">{hospital.name}</h3>
+                <RiHospitalLine className="text-3xl" />
+             </div>
+            
+             <p className="text-lg font-gray-500">{hospital.state}</p>
+           
 
           </li>
         ))}
       </ul>
+      <div className="flex overflow-x-auto sm:justify-center">
+      <Pagination currentPage={page} totalPages={totalPages} onPageChange={onPageChange} showIcons />
+    </div>
     </div>
   );
 }

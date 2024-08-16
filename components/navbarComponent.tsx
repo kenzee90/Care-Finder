@@ -4,11 +4,13 @@ import { CareFinderLogo } from "./carefinnder-logo";
 import { DarkThemeToggle } from "flowbite-react";
 import  { useRouter } from "next/navigation";
 import { redirect } from "next/navigation";
+import { useAuthContext } from "@/context/AuthContext";
 
 
 
 export function NavbarComponent() {
   const router = useRouter();
+  const { user, logOut} = useAuthContext()
     
   return (
     <Navbar fluid rounded>
@@ -18,11 +20,16 @@ export function NavbarComponent() {
       </NavbarBrand>
       <div className="flex md:order-2">
       <DarkThemeToggle />
-
-        <Button
-        onClick={() => router.push("/signIn")}>
-          Sign in /Register
-        </Button>
+          {
+             user == null?
+             <Button
+             onClick={() => router.push("/signIn")}>
+               Sign in /Register
+             </Button>
+          :
+            <Button onClick={logOut}>Logout</Button>
+          }
+       
 
         <NavbarToggle />
       </div>
