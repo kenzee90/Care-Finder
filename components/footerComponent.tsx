@@ -24,7 +24,7 @@ export function FooterComponent() {
           </FooterLinkGroup>
         </div>
         <FooterDivider />
-        <FooterCopyright href="#" by="Keneth Pam" year={2024} />
+        <FooterCopyright href="#" by="Kenneth Pam" year={2024} />
       </div>
     </Footer>
   );
