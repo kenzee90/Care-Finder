@@ -77,8 +77,8 @@ function ListHospitals() {
         {hospitals.map((hospital: Hospital) => (
           <li key={hospital.id} className="border-2 p-3 rounded-lg flex flex-col gap-3 justify-between">
             <div className="flex items-center justify-between">
-                <h3 className="text-3xl font-bold tracking-tight">{hospital.name}</h3>
-                <RiHospitalLine className="text-3xl" />
+                <h3 className="text-xl md:text-2xl font-bold tracking-tight">{hospital.name}</h3>
+                <RiHospitalLine className="text-2xl" />
              </div>
             
              <p className="text-lg font-gray-500">{hospital.state}</p>

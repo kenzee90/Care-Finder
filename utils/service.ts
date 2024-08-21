@@ -65,7 +65,7 @@ export const addHospital = async (
 };
 
 export async function getHospitals(
-  { page = 1, pageSize = 10, searchTerm = "", state = "" }
+  { page = 1, pageSize = 12, searchTerm = "", state = "" }
 ) {
   try {
     const productsRef = collection(db, "hospitals");
