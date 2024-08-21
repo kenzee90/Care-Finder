@@ -10,7 +10,7 @@ import { useAuthContext } from "@/context/AuthContext";
 
 export function NavbarComponent() {
   const router = useRouter();
-  const { user, logOut} = useAuthContext()
+  const { user, logout} = useAuthContext()
     
   return (
     <Navbar fluid rounded>
@@ -27,7 +27,7 @@ export function NavbarComponent() {
                Sign in /Register
              </Button>
           :
-            <Button onClick={logOut}>Logout</Button>
+            <Button onClick={logout}>Logout</Button>
           }
        
 
