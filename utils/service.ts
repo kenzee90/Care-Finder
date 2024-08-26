@@ -65,7 +65,7 @@ export const addHospital = async (
 };
 
 export async function getHospitals(
-  { page = 1, pageSize = 12, searchTerm = "", state = "" }
+  { page = 1, pageSize = 12, searchTerm = "" }
 ) {
   try {
     const productsRef = collection(db, "hospitals");
@@ -79,9 +79,6 @@ export async function getHospitals(
       );
     }
 
-    if (state) {
-      q = query(q, where("state", "==", state));
-    }
 
     q = query(q, orderBy("name"), limit(pageSize));
 
