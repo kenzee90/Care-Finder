@@ -15,7 +15,7 @@ interface Hospital {
 function ListHospitals() {
   const [hospitals, setHospitals] = useState<any>([]);
   const [page, setPage] = useState(1);
-  const [pageSize] = useState(10);
+  const [pageSize] = useState(12);
   const [totalPages, setTotalPages] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [state, setState] = useState("");

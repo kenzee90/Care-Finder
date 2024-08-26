@@ -38,8 +38,8 @@ export function NavbarComponent() {
           Home
         </NavbarLink>
         <NavbarLink href="/hospital-list">Hospital List</NavbarLink>
+        {user && <NavbarLink href="/dashboard">Add Care Provider</NavbarLink> }
         
-        <NavbarLink href="">Contact</NavbarLink>
       </NavbarCollapse>
     </Navbar>
   );
