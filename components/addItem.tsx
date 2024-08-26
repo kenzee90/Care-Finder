@@ -1,8 +1,9 @@
 "use client";
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Label, TextInput, Button } from "flowbite-react";
 import { addHospital } from '@/utils/service';
-
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 interface AddItem {
     name: string;
@@ -15,12 +16,19 @@ const AddItem = () => {
         description: '',
         state: '',
     });
+    const modules = {
+        toolbar: [
+          [{ 'header': [1, 2,  false] }],
+          ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+          
+        ]
+    }
     const handleSubmit = async (event: { preventDefault: () => void; }) => {
       event.preventDefault();
       addHospital(value.name, value.description, value.state);
       setValue({ name: "", description: "", state: "" }); // Clear the form
     };
-
+    const quillRef = useRef<ReactQuill>(null);
     return (
         // eslint-disable-next-line tailwindcss/classnames-order
         <form onSubmit={handleSubmit} className='flex flex-col items-center w-[70vw] py-5'>
@@ -37,11 +45,13 @@ const AddItem = () => {
                 <div className="mb-2 block">
                 <Label htmlFor="base2" value="Description" />
                 </div>
-                <TextInput id="base2" type="text" 
-                 value={value.description}
-                 onChange={(e) => setValue({ ...value, description: e.target.value })}
-                sizing="md" 
-                className='mb-2'/>
+                <ReactQuill
+                    theme='snow'
+                    value={value.description}
+                    onChange={(content) => setValue((prevValue) => ({ ...prevValue, description: content }))}
+                    modules={modules}
+                    ref={quillRef}
+                />
                 <div className="mb-2 block">
                 <Label htmlFor="base3" value="State" />
                 </div>
